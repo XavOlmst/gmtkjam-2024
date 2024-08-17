@@ -778,6 +778,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buildPrefab: {fileID: 5439877160794859833, guid: 22edf93e36cec1b4bb721a2dc0874935, type: 3}
+  mask:
+    serializedVersion: 2
+    m_Bits: 8
   _spawnRange: 2
   _minRange: 0.5
 --- !u!4 &1336820477

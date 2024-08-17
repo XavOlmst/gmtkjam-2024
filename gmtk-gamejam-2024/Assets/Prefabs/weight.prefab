@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 394609316965164145}
   - component: {fileID: 3314143757275094252}
   - component: {fileID: 5439877160794859833}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: weight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,6 +166,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 016f46a1f2d996841bc9daccb97e1f89, type: 3}
   - {fileID: 21300000, guid: da1da10d0622cb94eab6076ba6578766, type: 3}
   - {fileID: 21300000, guid: 361ffd71c95fee3489de3e22823a7538, type: 3}
-  springDistance: 1.5
-  dampingRatio: 0.8
-  frequency: 25
+  _springDistance: 1.5
+  _dampingRatio: 0.3
+  _frequency: 15

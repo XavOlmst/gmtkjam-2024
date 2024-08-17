@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildingSystem : MonoBehaviour
 {
     [SerializeField] private PlaceObject _buildPrefab;
+    [SerializeField] private LayerMask mask;
     [SerializeField] private float _spawnRange = 2;
     [SerializeField] private float _minRange = 0.5f; 
 
@@ -29,7 +30,7 @@ public class BuildingSystem : MonoBehaviour
             foreach(PlaceObject obj in nearObjects)
             {
                 obj.CreateNewSpring(spawnedObject.GetRigidbody2D());
-                spawnedObject.CreateNewSpring(obj.GetRigidbody2D());
+                //spawnedObject.CreateNewSpring(obj.GetRigidbody2D());
             }
         }
     }
@@ -50,6 +51,12 @@ public class BuildingSystem : MonoBehaviour
         foreach(PlaceObject obj in _currentObjects)
         {
             float dist = Vector3.Distance(obj.transform.position, pos);
+
+            if (Physics.Raycast(pos, (Vector2)obj.transform.position - pos, dist, mask))
+            {
+                continue;
+            }
+
             if (dist < _spawnRange)
             {
                 if(dist < _minRange)
