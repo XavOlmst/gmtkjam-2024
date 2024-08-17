@@ -6,6 +6,7 @@ public class BuildingSystem : MonoBehaviour
 {
     [SerializeField] private PlaceObject _buildPrefab;
     [SerializeField] private float _spawnRange = 2;
+    [SerializeField] private float _minRange = 0.5f; 
 
     private List<PlaceObject> _currentObjects = new();
 
@@ -46,10 +47,17 @@ public class BuildingSystem : MonoBehaviour
     {
         List<PlaceObject> nearObjects = new();
 
-        foreach(var obj in _currentObjects)
+        foreach(PlaceObject obj in _currentObjects)
         {
-            if(Vector3.Distance(obj.transform.position, pos) < _spawnRange)
+            float dist = Vector3.Distance(obj.transform.position, pos);
+            if (dist < _spawnRange)
             {
+                if(dist < _minRange)
+                {
+                    nearObjects.Clear();
+                    return nearObjects;
+                }
+
                 nearObjects.Add(obj);
             }
         }

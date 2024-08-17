@@ -25,12 +25,11 @@ public class PlaceObject : MonoBehaviour
 
     public void CreateNewSpring(Rigidbody2D connectedRigidbody)
     {
-        var newSpring = gameObject.AddComponent<SpringJoint2D>();
-        //newSpring.enableCollision = true;
+        SpringJoint2D newSpring = gameObject.AddComponent<SpringJoint2D>();
         newSpring.autoConfigureDistance = false;
-        newSpring.distance = springDistance;
-        newSpring.dampingRatio = dampingRatio;
-        newSpring.frequency = frequency;
+        newSpring.distance = _springDistance;
+        newSpring.dampingRatio = _dampingRatio;
+        newSpring.frequency = _frequency;
 
         newSpring.connectedBody = connectedRigidbody;
 
