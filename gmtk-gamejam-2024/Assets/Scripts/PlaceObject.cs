@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlaceObject : MonoBehaviour
 {
+    [SerializeField] private List<Sprite> _objectSprites = new(); 
+
     [SerializeField] private float springDistance = 1.5f;
     [SerializeField] private float dampingRatio = 0.3f;
     [SerializeField] private float frequency = 1;
@@ -14,6 +16,7 @@ public class PlaceObject : MonoBehaviour
 
     private void Awake()
     {
+        GetComponent<SpriteRenderer>().sprite = _objectSprites[Random.Range(0, _objectSprites.Count)];
         _springs.AddRange(GetComponents<SpringJoint2D>());
         _rb = GetComponent<Rigidbody2D>();
     }
