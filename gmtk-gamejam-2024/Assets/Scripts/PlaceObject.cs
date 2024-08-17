@@ -7,9 +7,9 @@ public class PlaceObject : MonoBehaviour
 {
     [SerializeField] private List<Sprite> _objectSprites = new(); 
 
-    [SerializeField] private float springDistance = 1.5f;
-    [SerializeField] private float dampingRatio = 0.3f;
-    [SerializeField] private float frequency = 1;
+    [SerializeField] private float _springDistance = 1.5f;
+    [SerializeField] private float _dampingRatio = 0.3f;
+    [SerializeField] private float _frequency = 1;
 
     private List<SpringJoint2D> _springs = new();
     private Rigidbody2D _rb;
