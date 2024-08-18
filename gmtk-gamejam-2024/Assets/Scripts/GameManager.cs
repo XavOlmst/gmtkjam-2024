@@ -19,6 +19,7 @@ public static class GameManager
     public static void SetGameState(GameState state) => _currentState = state;
     public static float GetBestHeight() => _bestHeight;
     public static GameState GetGameState() => _currentState;
+    public static void ResetBestHeight() => _bestHeight = -10000;
 
     public static void CheckForMaxHeight()
     {
