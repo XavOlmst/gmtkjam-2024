@@ -44,6 +44,9 @@ TagManager:
   - name: BG1
     uniqueID: 1992336459
     locked: 0
+  - name: Decor
+    uniqueID: 2138844687
+    locked: 0
   - name: SpringVis
     uniqueID: 3335106955
     locked: 0
