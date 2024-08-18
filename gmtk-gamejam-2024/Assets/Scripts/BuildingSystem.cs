@@ -10,12 +10,14 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private float _minRange = 0.5f; 
 
     private List<PlaceObject> _currentObjects = new();
+    private LineRenderer _lineRenderer;
 
     private void Awake()
     {
         GameManager.SetBuildManager(this);
 
-        _currentObjects.AddRange(GameObject.FindObjectsOfType<PlaceObject>());
+        _currentObjects.AddRange(FindObjectsOfType<PlaceObject>());
+        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Update()
@@ -38,6 +40,7 @@ public class BuildingSystem : MonoBehaviour
             }
         }
 
+        DrawPreviewLines();
         GameManager.CheckForMaxHeight();
     }
 
@@ -49,6 +52,23 @@ public class BuildingSystem : MonoBehaviour
 
         _currentObjects.Add(newObject);
         return newObject;
+    }
+
+    public void DrawPreviewLines()
+    {
+        Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var nearObjects = GetObjectsInRange(worldMousePos);
+
+        nearObjects = GetThreeClosest(nearObjects, worldMousePos);
+        _lineRenderer.positionCount = nearObjects.Count * 2;
+
+        for (int i = 0; i < nearObjects.Count; i++)
+        {
+            PlaceObject obj = nearObjects[i];
+
+            _lineRenderer.SetPosition(i * 2, obj.transform.position);
+            _lineRenderer.SetPosition(i * 2 + 1, worldMousePos);
+        }
     }
 
     public List<PlaceObject> GetThreeClosest(List<PlaceObject> allNearest, Vector2 placePos)

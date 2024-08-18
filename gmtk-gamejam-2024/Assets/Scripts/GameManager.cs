@@ -41,7 +41,6 @@ public static class GameManager
     {
         var macAdress = "";
         NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
-        var i = 0;
         foreach (NetworkInterface adapter in nics)
         {
             var address = adapter.GetPhysicalAddress();
