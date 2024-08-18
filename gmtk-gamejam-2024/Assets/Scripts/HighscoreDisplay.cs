@@ -9,18 +9,28 @@ public class HighscoreDisplay : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private TMP_Text _textPrefab;
     [SerializeField] private Color _highlightColor;
-    [SerializeField] private List<float> _allHighscores = new();
+    private List<float> _allHighscores = new();
 
     private void Awake()
     {
+        _allHighscores.Clear();
+        LoadHighscores();
+
         SortHighscores();
         UpdateHighscoreVisuals();
     }
 
     public void LoadHighscores()
     {
-        //TODO: load highscore data from server...
-        _allHighscores = new();
+        HighscoreData highscores = SaveLoadSystem.LoadHighscore();
+        if (highscores == null) return;
+
+        foreach(float highscore in highscores._highscores)
+        {
+            if (highscore <= 0) continue;
+
+            _allHighscores.Add(highscore);
+        }
     }
 
     private void SortHighscores()

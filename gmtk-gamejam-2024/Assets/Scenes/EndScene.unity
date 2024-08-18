@@ -638,7 +638,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_Spacing: -5
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -659,11 +659,6 @@ MonoBehaviour:
   _panel: {fileID: 1448727701}
   _textPrefab: {fileID: 270647652402525049, guid: 123f9e9172156a349aab90643bc5b94f, type: 3}
   _highlightColor: {r: 0, g: 1, b: 0, a: 1}
-  _allHighscores:
-  - 23
-  - 19
-  - 40
-  - -10000
 --- !u!1001 &4869125258351004112
 PrefabInstance:
   m_ObjectHideFlags: 0

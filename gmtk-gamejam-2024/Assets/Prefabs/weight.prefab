@@ -134,7 +134,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -169,5 +169,5 @@ MonoBehaviour:
   _springVisPrefab: {fileID: 2074511225992984566, guid: 238b7a453d0c43d4b94040470dc33f5d, type: 3}
   _initialConnections: []
   _springDistance: 1.5
-  _dampingRatio: 0.3
-  _frequency: 15
+  _dampingRatio: 0.1
+  _frequency: 5
