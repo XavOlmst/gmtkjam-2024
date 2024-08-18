@@ -29,13 +29,28 @@ public static class GameManager
             if (yHeight > _bestHeight)
             {
                 _bestHeight = yHeight;
-                Debug.Log($"Best Height is {_bestHeight}");
+                //Debug.Log($"Best Height is {_bestHeight}");
 
                 //TODO: output highscore to server replacing with macAddress
 
-                Debug.Log($"MAC Address: {GetMacAddress()}");
+                //Debug.Log($"MAC Address: {GetMacAddress()}");
             }
         }
+    }
+
+    public static float GetCurrentMaxHeight()
+    {
+        float height = float.MinValue;
+        foreach(PlaceObject obj in _buildManager.GetAllObjects())
+        {
+            float yHeight = obj.transform.position.y;
+            if (yHeight > height)
+            {
+                height = yHeight;
+            }
+        }
+
+        return height;
     }
 
     private static string GetMacAddress()

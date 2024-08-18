@@ -30,7 +30,7 @@ public class FinalScoreDisplay : MonoBehaviour
             totalTime += Time.deltaTime;
         }
 
-        _display.text = $"Best Height: {GameManager.GetBestHeight()}";
+        _display.text = $"Best Height: {GameManager.GetBestHeight().ToString("F2")}";
     }
 
 }

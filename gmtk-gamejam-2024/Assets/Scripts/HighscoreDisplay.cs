@@ -50,7 +50,7 @@ public class HighscoreDisplay : MonoBehaviour
             var text = Instantiate(_textPrefab, _panel.transform);
 
             float highscore = _allHighscores[i];
-            text.text = $"{i + 1}: {highscore}";
+            text.text = $"{i + 1}: {highscore.ToString("F2")}";
 
             if (Mathf.Approximately(highscore, GameManager.GetBestHeight()))
             {
@@ -67,7 +67,7 @@ public class HighscoreDisplay : MonoBehaviour
                 if (Mathf.Approximately(highscore, GameManager.GetBestHeight()))
                 {
                     TMP_Text text = Instantiate(_textPrefab, _panel.transform);
-                    text.text = $"{i + 1}: {highscore}";
+                    text.text = $"{i + 1}: {highscore.ToString("F2")}";
                     text.color = _highlightColor;
                 }
             }
