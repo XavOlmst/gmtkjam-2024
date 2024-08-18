@@ -7,6 +7,7 @@ public class PlaceObject : MonoBehaviour
 {
     [SerializeField] private List<Sprite> _objectSprites = new();
     [SerializeField] private SpringVisuals _springVisPrefab;
+    [SerializeField] private List<PlaceObject> _initialConnections = new();
 
     [SerializeField] private float _springDistance = 1.5f;
     [SerializeField] private float _dampingRatio = 0.3f;
@@ -20,6 +21,16 @@ public class PlaceObject : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = _objectSprites[Random.Range(0, _objectSprites.Count)];
         _springs.AddRange(GetComponents<SpringJoint2D>());
         _rb = GetComponent<Rigidbody2D>();
+
+        
+    }
+
+    private void Start()
+    {
+        foreach (PlaceObject place in _initialConnections)
+        {
+            CreateNewSpring(place.GetRigidbody2D());
+        }
     }
 
     public Rigidbody2D GetRigidbody2D() => _rb;

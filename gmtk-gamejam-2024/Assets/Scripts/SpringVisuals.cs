@@ -24,6 +24,6 @@ public class SpringVisuals : MonoBehaviour
         );
         var a = new Vector3(transform.position.x, transform.position.y, 0);
         var b = new Vector3(secondObject.transform.position.x, secondObject.transform.position.y, 0);
-        transform.localRotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(transform.position, secondObject.transform.position, Vector3.forward));
+        transform.right = Vector3.Normalize(b - a);
     }
 }
