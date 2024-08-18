@@ -13,6 +13,8 @@ public class BuildingSystem : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.SetBuildManager(this);
+
         _currentObjects.AddRange(GameObject.FindObjectsOfType<PlaceObject>());
     }
 
@@ -25,15 +27,19 @@ public class BuildingSystem : MonoBehaviour
 
             if (nearObjects.Count < 1) return;
 
+            nearObjects = GetThreeClosest(nearObjects, worldMousePos);
             PlaceObject spawnedObject = SpawnObjectAtPos(worldMousePos);
 
             foreach(PlaceObject obj in nearObjects)
             {
-                obj.CreateNewSpring(spawnedObject.GetRigidbody2D());
-                //spawnedObject.CreateNewSpring(obj.GetRigidbody2D());
+                obj.CreateNewSpring(spawnedObject);
             }
         }
+
+        GameManager.CheckMaxHeight();
     }
+
+    public List<PlaceObject> GetAllObjects() => _currentObjects;
 
     public PlaceObject SpawnObjectAtPos(Vector2 position)
     {
@@ -43,6 +49,31 @@ public class BuildingSystem : MonoBehaviour
         return newObject;
     }
 
+    public List<PlaceObject> GetThreeClosest(List<PlaceObject> allNearest, Vector2 placePos)
+    {
+        if (allNearest.Count <= 3) return allNearest;
+
+        List<PlaceObject> threeClosest = new(3);
+
+        threeClosest.AddRange(allNearest.GetRange(0, 3));
+
+        foreach(PlaceObject obj in allNearest)
+        {
+            Vector3 pos = obj.transform.position;
+            float dist = Vector3.Distance(obj.transform.position, placePos);
+
+            for(int i = 0; i < 3; i++)
+            {
+                if (dist < Vector3.Distance(threeClosest[i].transform.position, placePos))
+                {
+                    threeClosest[i] = obj;
+                    break;
+                }
+            }
+        }
+
+        return threeClosest;
+    }
 
     public List<PlaceObject> GetObjectsInRange(Vector2 pos)
     {
@@ -52,7 +83,9 @@ public class BuildingSystem : MonoBehaviour
         {
             float dist = Vector3.Distance(obj.transform.position, pos);
 
-            if (Physics.Raycast(pos, (Vector2)obj.transform.position - pos, dist, mask))
+            ;
+
+            if (Physics2D.Linecast(pos, obj.transform.position, ~mask))
             {
                 continue;
             }

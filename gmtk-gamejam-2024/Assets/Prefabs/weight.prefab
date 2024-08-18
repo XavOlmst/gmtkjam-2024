@@ -166,7 +166,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 016f46a1f2d996841bc9daccb97e1f89, type: 3}
   - {fileID: 21300000, guid: da1da10d0622cb94eab6076ba6578766, type: 3}
   - {fileID: 21300000, guid: 361ffd71c95fee3489de3e22823a7538, type: 3}
+  _springVisPrefab: {fileID: 2074511225992984566, guid: 238b7a453d0c43d4b94040470dc33f5d, type: 3}
+  _initialConnections: []
   _springDistance: 1.5
   _dampingRatio: 0.3
   _frequency: 15
-  _springVisPrefab: {fileID: 2074511225992984566, guid: 238b7a453d0c43d4b94040470dc33f5d, type: 3}
