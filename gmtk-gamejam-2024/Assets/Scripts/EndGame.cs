@@ -35,28 +35,14 @@ public class EndGame : MonoBehaviour
 
     private void SortUpdatedHighscores(HighscoreData data)
     {
-        List<float> highscores = new(data._highscores);
-
-        if (highscores.Count >= 10)
+        List<float> highscores = new(data._highscores)
         {
-            highscores.Sort();
-            highscores.Reverse();
+            GameManager.GetBestHeight()
+        };
 
-            for (int i = 0; i < highscores.Count; i++)
-            {
-                float score = highscores[i];
-                if (GameManager.GetBestHeight() > score)
-                {
-                    highscores[i] = GameManager.GetBestHeight();
-                    break;
-                }
-            }
-        }
-        else
-        {
-            highscores.Add(GameManager.GetBestHeight());
-        }
+        highscores.Sort();
+        highscores.Reverse();
 
-        data._highscores = highscores.ToArray();
+        data._highscores = highscores.GetRange(0, 10).ToArray();
     }
 }
