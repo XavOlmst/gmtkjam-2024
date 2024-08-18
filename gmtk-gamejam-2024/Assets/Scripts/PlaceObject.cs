@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlaceObject : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> _objectSprites = new(); 
+    [SerializeField] private List<Sprite> _objectSprites = new();
+    [SerializeField] private SpringVisuals _springVisPrefab;
 
     [SerializeField] private float _springDistance = 1.5f;
     [SerializeField] private float _dampingRatio = 0.3f;
@@ -25,6 +26,9 @@ public class PlaceObject : MonoBehaviour
 
     public void CreateNewSpring(Rigidbody2D connectedRigidbody)
     {
+        SpringVisuals vis = Instantiate(_springVisPrefab, transform);
+        vis.SetConnections(gameObject, connectedRigidbody.gameObject);
+
         SpringJoint2D newSpring = gameObject.AddComponent<SpringJoint2D>();
         newSpring.autoConfigureDistance = false;
         newSpring.distance = _springDistance;

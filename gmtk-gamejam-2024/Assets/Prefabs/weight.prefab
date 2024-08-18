@@ -169,3 +169,4 @@ MonoBehaviour:
   _springDistance: 1.5
   _dampingRatio: 0.3
   _frequency: 15
+  _springVisPrefab: {fileID: 2074511225992984566, guid: 238b7a453d0c43d4b94040470dc33f5d, type: 3}
