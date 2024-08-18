@@ -20,26 +20,33 @@ public class CameraPanner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 moveDir = new();
+        if (GameManager.GetGameState() == GameState.RUNNING)
+        {
+            Vector3 moveDir = new();
 
-        if(Input.mousePosition.x > maxPixels.x)
-        {
-            moveDir += Vector3.right;
-        }
-        else if (Input.mousePosition.x < minPixels.x)
-        {
-            moveDir -= Vector3.right;
-        }
+            if (Input.mousePosition.x > maxPixels.x)
+            {
+                moveDir += Vector3.right;
+            }
+            else if (Input.mousePosition.x < minPixels.x)
+            {
+                moveDir -= Vector3.right;
+            }
 
-        if (Input.mousePosition.y > maxPixels.y)
-        {
-            moveDir += Vector3.up;
-        }
-        else if (Input.mousePosition.y < minPixels.y)
-        {
-            moveDir -= Vector3.up;
-        }
+            if (Input.mousePosition.y > maxPixels.y)
+            {
+                moveDir += Vector3.up;
+            }
+            else if (Input.mousePosition.y < minPixels.y)
+            {
+                moveDir -= Vector3.up;
+            }
 
-        transform.position += moveDir.normalized * cameraSpeed * Time.deltaTime;
+            transform.position += moveDir.normalized * cameraSpeed * Time.deltaTime;
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, transform.position.z), Time.deltaTime * 10.0f);
+        }
     }
 }

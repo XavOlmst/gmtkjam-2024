@@ -5,7 +5,7 @@ using UnityEngine;
 public class CanvasObject : MonoBehaviour
 {
     [SerializeField] private Vector2 _endCanvasPos;
-    [SerializeField] private float _lerpTime = 0.2f;
+    [SerializeField] private float _lerpTime = 5.0f;
     private bool _isSliding = false;
     private RectTransform _rectTransform;
     private float _timeLeft;
@@ -24,7 +24,7 @@ public class CanvasObject : MonoBehaviour
         if (percent > 1) percent = 1;
         if (percent < 0) percent = 0;
 
-        _rectTransform.localPosition = Vector2.Lerp(_rectTransform.localPosition, _endCanvasPos, 1 - percent);
+        _rectTransform.localPosition = Vector2.MoveTowards(_rectTransform.localPosition, _endCanvasPos, _lerpTime * Time.deltaTime);
 
         _timeLeft -= Time.deltaTime;
     }
