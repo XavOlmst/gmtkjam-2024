@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public static class GameManager
@@ -8,8 +9,9 @@ public static class GameManager
     private static float _bestHeight = -10000f;
 
     public static void SetBuildManager(BuildingSystem buildManager) => _buildManager = buildManager;
+    public static float GetBestHeight() => _bestHeight;
 
-    public static void CheckMaxHeight()
+    public static void CheckForMaxHeight()
     {
         foreach(PlaceObject obj in _buildManager.GetAllObjects())
         {
@@ -18,7 +20,29 @@ public static class GameManager
             {
                 _bestHeight = yHeight;
                 Debug.Log($"Best Height is {_bestHeight}");
+
+                //TODO: output highscore to server replacing with macAddress
+
+                Debug.Log($"MAC Address: {GetMacAddress()}");
             }
         }
+    }
+
+    private static string GetMacAddress()
+    {
+        var macAdress = "";
+        NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+        var i = 0;
+        foreach (NetworkInterface adapter in nics)
+        {
+            var address = adapter.GetPhysicalAddress();
+            if (address.ToString() != "")
+            {
+                macAdress = address.ToString();
+                return macAdress;
+            }
+        }
+
+        return "error lectura mac address";
     }
 }

@@ -36,7 +36,7 @@ public class BuildingSystem : MonoBehaviour
             }
         }
 
-        GameManager.CheckMaxHeight();
+        GameManager.CheckForMaxHeight();
     }
 
     public List<PlaceObject> GetAllObjects() => _currentObjects;
