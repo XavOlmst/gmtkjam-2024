@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
 
+public enum GameState
+{
+    RUNNING,
+    GAME_OVER,
+}
+
 public static class GameManager
 {
     [SerializeField] private static BuildingSystem _buildManager;
     private static float _bestHeight = -10000f;
+    private static GameState _currentState;
 
     public static void SetBuildManager(BuildingSystem buildManager) => _buildManager = buildManager;
+    public static void SetGameState(GameState state) => _currentState = state;
     public static float GetBestHeight() => _bestHeight;
+    public static GameState GetGameState() => _currentState;
 
     public static void CheckForMaxHeight()
     {

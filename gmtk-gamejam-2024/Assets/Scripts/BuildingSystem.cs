@@ -20,6 +20,8 @@ public class BuildingSystem : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.GetGameState() == GameState.GAME_OVER) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

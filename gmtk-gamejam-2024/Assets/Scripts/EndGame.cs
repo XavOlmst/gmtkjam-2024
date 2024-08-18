@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour
 {
+    [SerializeField] private EndGameCanvas _gameOverCanvas;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Invoke("LoadNextScene", 1f);
+        if (GameManager.GetGameState() == GameState.GAME_OVER) return;
+
+        EndTheGame();
     }
 
-    private void LoadNextScene()
+    private void EndTheGame()
     {
         HighscoreData data = SaveLoadSystem.LoadHighscore();
         
@@ -24,8 +28,9 @@ public class EndGame : MonoBehaviour
 
         SaveLoadSystem.SaveHighscore(data);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
+        GameManager.SetGameState(GameState.GAME_OVER);
+        _gameOverCanvas.gameObject.SetActive(true);
+        _gameOverCanvas.StartTheSlides();
     }
 
     private void SortUpdatedHighscores(HighscoreData data)
@@ -39,7 +44,7 @@ public class EndGame : MonoBehaviour
 
             for (int i = 0; i < highscores.Count; i++)
             {
-                float score = highscores.Count;
+                float score = highscores[i];
                 if (GameManager.GetBestHeight() > score)
                 {
                     highscores[i] = GameManager.GetBestHeight();
